@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
+import ConnectWallet from '@/components/wallet/ConnectWallet'
 
 const Header: React.FC = () => {
   return (
@@ -13,11 +14,11 @@ const Header: React.FC = () => {
           </h1>
           <nav className="ml-8 hidden md:block">
             <ul className="flex space-x-6">
-              <li>
+              {/* <li>
                 <Link to="/" className="hover:text-blue-400 transition">
                   首頁
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link to="/proposals" className="hover:text-blue-400 transition">
                   所有提案
@@ -26,7 +27,8 @@ const Header: React.FC = () => {
             </ul>
           </nav>
         </div>
-        <button className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition">連接錢包</button>
+
+        <ConnectWallet />
       </div>
     </header>
   )
