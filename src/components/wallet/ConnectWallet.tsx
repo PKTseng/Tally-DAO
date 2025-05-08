@@ -1,6 +1,5 @@
-import React, { useState, useEffect, forwardRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useAccount, useConnect, useDisconnect, useEnsName } from 'wagmi'
-import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,21 +10,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { ChevronDown } from 'lucide-react'
-
-// 創建一個支援 ref 轉發的按鈕組件
-const ButtonWithRef = forwardRef<
-  HTMLButtonElement,
-  React.ButtonHTMLAttributes<HTMLButtonElement> & { className?: string; variant?: string }
->((props, ref) => {
-  const { children, className, variant = 'default', ...rest } = props
-  return (
-    <Button ref={ref} variant={variant as any} className={className} {...rest}>
-      {children}
-    </Button>
-  )
-})
-
-ButtonWithRef.displayName = 'ButtonWithRef'
+import { Button } from '@/components/ui/button'
 
 export const ConnectWallet: React.FC = () => {
   const { address, isConnected } = useAccount()
@@ -68,10 +53,10 @@ export const ConnectWallet: React.FC = () => {
       {isConnected ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <ButtonWithRef className="flex items-center gap-2">
+            <div className="bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium h-9 px-4 py-2 transition-all cursor-pointer">
               {displayName}
               <ChevronDown className="h-4 w-4" />
-            </ButtonWithRef>
+            </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-56">
             <DropdownMenuLabel>錢包地址</DropdownMenuLabel>
@@ -88,7 +73,9 @@ export const ConnectWallet: React.FC = () => {
       ) : (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <ButtonWithRef>連接錢包</ButtonWithRef>
+            <div className="bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium h-9 px-4 py-2 transition-all cursor-pointer">
+              連接錢包
+            </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-56">
             <DropdownMenuLabel>選擇錢包</DropdownMenuLabel>
